@@ -28,5 +28,5 @@ app.use('/', indexRouter);
 
 const port = process.env.PORT || 5966
 app.listen(port, () => {
-    console.log('Server sudah berjalan')
+    console.log('Server sudah berjalan pada port: ' + port)
 })
