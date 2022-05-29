@@ -1,5 +1,6 @@
 const express = require('express');
 const Subscribe = require('../models/subscribe')
+const Inquiry = require('../models/inquiry')
 
 const router = express.Router();
 
@@ -27,6 +28,31 @@ router.post('/subscribe', async (req,res) => {
         }
     })
     
+    res.redirect('/contact');
+})
+
+router.post('/inquiry', async (req, res) => {
+    const fullname = req.body.fullname;
+    const email = req.body.email;
+    const phonenumber = req.body.phonenumber;
+    const message = req.body.message;
+
+    const newInquiry = new Inquiry({
+        fullName: fullname,
+        email: email,
+        phoneNumber: phonenumber,
+        message: message
+    })
+    
+    await newInquiry.save((err, res) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log('Inquiry post success!')
+        }
+    })
+
     res.redirect('/contact');
 })
 
